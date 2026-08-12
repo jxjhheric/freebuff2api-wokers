@@ -1,7 +1,7 @@
 const CODEBUFF_API = "https://www.codebuff.com";
 const DEFAULT_MODEL = "deepseek/deepseek-v4-flash";
 const DEFAULT_API_KEY = "freebuff-default-key";
-const VERSION = "1.8.8";
+const VERSION = "1.8.9";
 const CONTEXT_PRUNER_AGENT = "context-pruner";
 
 // 动态模型注册表：从官方 freebuff 镜像拉取模型清单
@@ -1425,7 +1425,8 @@ function anthropicModelToOpenAI(model) {
   const raw = String(model || DEFAULT_MODEL).trim();
   if (findModelConfig(raw)) return raw;
   const short = raw.replace(/^anthropic\//, "");
-  const hit = MODELS.find((m) => m.id.toLowerCase().endsWith("/" + short.toLowerCase()));
+  const dyn = dynamicModelsCache.models;
+  const hit = [...MODELS, ...(dyn || [])].find((m) => m.id.toLowerCase().endsWith("/" + short.toLowerCase()));
   return hit ? hit.id : DEFAULT_MODEL;
 }
 
@@ -1527,8 +1528,9 @@ function estimateAnthropicTokens(value) {
 async function handleAnthropicCountTokens(request, env) {
   let body;
   try { body = await request.json(); } catch { return anthropicError("Invalid JSON", "invalid_request_error", 400); }
+  try { await refreshDynamicModelsIfStale(); } catch {}
   const openaiModel = anthropicModelToOpenAI(body.model);
-  const mc = findModelConfig(openaiModel);
+  const mc = await resolveModelConfig(openaiModel);
   if (!mc) return anthropicError("Model not available: " + (body.model || ""), "invalid_request_error", 400);
   const chat = anthropicToChat(body, mc);
   return jsonResponse({ input_tokens: Math.max(1, Math.ceil(estimateAnthropicTokens(chat.messages) / 4)) }, 200);
@@ -1582,8 +1584,9 @@ function anthropicStream(mc) {
 async function handleAnthropicMessages(request, env) {
   let body;
   try { body = await request.json(); } catch { return anthropicError("Invalid JSON", "invalid_request_error", 400); }
+  try { await refreshDynamicModelsIfStale(); } catch {}
   const openaiModel = anthropicModelToOpenAI(body.model);
-  const mc = findModelConfig(openaiModel);
+  const mc = await resolveModelConfig(openaiModel);
   if (!mc) return anthropicError("Model not available: " + (body.model || ""), "invalid_request_error", 400);
   const chat = anthropicToChat(body, mc);
   const response = await executeChat(env, chat, mc, !!chat.stream, "chat");
