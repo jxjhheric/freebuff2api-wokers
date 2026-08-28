@@ -1,4 +1,4 @@
-# Freebuff 可用模型（2026-08-28 06:10:52 北京时间）
+# Freebuff 可用模型（2026-08-28 19:09:14 北京时间）
 
 > 自动生成 · 来源：[CodebuffAI/freebuff](https://github.com/CodebuffAI/freebuff) main · 更新频率：每 6 小时
 
@@ -8,6 +8,7 @@
 - `meta/muse-spark-1.2-contributor` —— Muse Spark 1.2（Meta 开发者专属，限量）
 - `openai/gpt-5.6-luna` —— GPT-5.6 Luna（OpenAI 最新，推理顶尖）
 - `openai/gpt-5.6-luna-es` —— openai/gpt-5.6-luna-es
+- `upstage/solar-pro4` —— upstage/solar-pro4
 - `z-ai/glm-5.3-flash` —— z-ai/glm-5.3-flash
 
 ## 标准（STANDARD）模型
@@ -24,4 +25,4 @@
 - `z-ai/glm-5.2` —— GLM 5.2（智谱 AI，推荐解锁后使用）
 
 ---
-共 12 个模型 · 上次更新：2026-08-28 06:10:52
+共 13 个模型 · 上次更新：2026-08-28 19:09:14
