@@ -1,4 +1,4 @@
-# Freebuff 可用模型（2026-09-18 12:25:45 北京时间）
+# Freebuff 可用模型（2026-09-18 19:02:15 北京时间）
 
 > 自动生成 · 来源：[CodebuffAI/freebuff](https://github.com/CodebuffAI/freebuff) main · 更新频率：每 6 小时
 
@@ -7,7 +7,7 @@
 
 ## 标准（STANDARD）模型
 
-- `anthropic/claude-fable-5` —— Claude Fable 5（Anthropic 限量模型）
+- `anthropic/claude-fable-5.1` —— anthropic/claude-fable-5.1
 - `crof/kimi-k3-eco` —— Kimi K3 Eco（CROF 平衡型模型）
 - `deepseek/deepseek-v4-flash` —— DeepSeek V4 Flash（推理模型，代码/数学/推理优秀）
 - `deepseek/deepseek-v4-pro` —— DeepSeek V4 Pro（最强推理模型）
@@ -26,4 +26,4 @@
 
 
 ---
-共 14 个模型 · 上次更新：2026-09-18 12:25:45
+共 14 个模型 · 上次更新：2026-09-18 19:02:15
